@@ -34,6 +34,7 @@ pnpm typecheck
 pnpm test
 pnpm build
 pnpm eval
+pnpm eval:qwen
 pnpm test:e2e
 ```
 
@@ -48,7 +49,7 @@ pnpm test:e2e
 
 ## Measured sandbox result
 
-The checked-in result at `docs/evaluation/results.json` was produced by `pnpm eval` on July 16, 2026. Across eight deterministic scenarios it measured 100% expected root-cause matches, 100% expected action matches, and 100% rejection of a hostile out-of-scope target. Average tool use was 5.3 calls per run. Token counts are zero because this specific artifact measures the offline sandbox path, not Qwen Cloud. A Qwen-backed result will be reported separately after the deployment key is configured.
+The checked-in result at `docs/evaluation/results.json` was produced by `pnpm eval` on July 16, 2026. Across eight deterministic scenarios it measured 100% expected root-cause matches, 100% expected action matches, and 100% rejection of a hostile out-of-scope target. Average tool use was 5.3 calls per run. Token counts are zero because this specific artifact measures the offline sandbox path, not Qwen Cloud. `pnpm eval:qwen` runs the same fixtures through RunbookPilot and a no-tool, single-prompt Qwen baseline, writing a separate cloud result. Runs that use the deterministic fallback are labeled and excluded from model accuracy.
 
 ## Deployment and safety
 

@@ -15,6 +15,7 @@
     "test:e2e": "pnpm build && tsx scripts/run-e2e.ts",
     "typecheck": "pnpm --filter @runbookpilot/core build && pnpm --filter @runbookpilot/api typecheck && pnpm --filter @runbookpilot/web typecheck",
     "eval": "tsx scripts/evaluate.ts",
+    "eval:qwen": "tsx scripts/evaluate-qwen.ts",
     "demo:tts": "tsx scripts/generate-demo-tts.ts",
     "demo:mux": "tsx scripts/mux-demo.ts",
     "check": "pnpm typecheck && pnpm test && pnpm build"
