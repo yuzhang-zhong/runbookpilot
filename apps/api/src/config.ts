@@ -1,4 +1,6 @@
-import "dotenv/config";
+import { config as loadEnv } from "dotenv";
+
+loadEnv({ override: true, quiet: true });
 
 export interface AppConfig {
   qwenApiKey?: string;

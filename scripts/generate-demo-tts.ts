@@ -1,6 +1,8 @@
-import "dotenv/config";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import OpenAI from "openai";
+import { config as loadEnv } from "dotenv";
+
+loadEnv({ override: true, quiet: true });
 
 if (!process.env.OPENAI_API_KEY) {
   throw new Error("OPENAI_API_KEY is required to generate demo narration.");
