@@ -1,0 +1,55 @@
+edition: 3.0.0
+name: runbookpilot
+access: default
+
+vars:
+  region: ${env('FC_REGION', 'us-west-1')}
+
+resources:
+  api:
+    component: fc3
+    actions:
+      pre-deploy:
+        - run: pnpm install --frozen-lockfile
+          path: ..
+        - run: pnpm --filter @runbookpilot/core build
+          path: ..
+        - run: pnpm --filter @runbookpilot/api build
+          path: ..
+        - run: pnpm --filter @runbookpilot/api deploy infra/.fc-code --prod --legacy
+          path: ..
+    props:
+      region: ${vars.region}
+      functionName: runbookpilot-api
+      description: Safety-gated SRE sandbox for Qwen Cloud Hackathon Track 4
+      runtime: custom.debian10
+      code: ./.fc-code
+      handler: not-used
+      timeout: 120
+      memorySize: 512
+      diskSize: 512
+      instanceConcurrency: 10
+      internetAccess: true
+      customRuntimeConfig:
+        port: 9000
+        command:
+          - /var/fc/lang/nodejs20/bin/node
+          - dist/server.js
+      environmentVariables:
+        NODE_ENV: production
+        DASHSCOPE_API_KEY: ${env('DASHSCOPE_API_KEY')}
+        QWEN_BASE_URL: ${env('QWEN_BASE_URL', 'https://dashscope-intl.aliyuncs.com/compatible-mode/v1')}
+        APPROVAL_HMAC_SECRET: ${env('APPROVAL_HMAC_SECRET')}
+        ALLOWED_ORIGIN: ${env('ALLOWED_ORIGIN')}
+      triggers:
+        - triggerName: public-http
+          triggerType: http
+          description: Public API endpoint protected by application CORS and safety gates
+          qualifier: LATEST
+          triggerConfig:
+            authType: anonymous
+            disableURLInternet: false
+            methods:
+              - GET
+              - POST
+              - OPTIONS

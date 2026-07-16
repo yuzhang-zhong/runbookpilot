@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="900" viewBox="0 0 1440 900" role="img" aria-labelledby="title desc">
+  <title id="title">RunbookPilot architecture</title>
+  <desc id="desc">GitHub Pages sends incident requests to Function Compute. The orchestrator uses Qwen Cloud, MCP tools, policy, approval, and a deterministic SRE sandbox.</desc>
+  <defs>
+    <pattern id="grid" width="32" height="32" patternUnits="userSpaceOnUse"><path d="M32 0H0V32" fill="none" stroke="#223038" stroke-width="1"/></pattern>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#55d6c2"/></marker>
+    <style>
+      .label{font:700 17px 'Arial',sans-serif;fill:#f4f0e8;letter-spacing:.5px}.small{font:14px 'Arial',sans-serif;fill:#9fb0b6}.mono{font:13px 'Courier New',monospace;fill:#f1b24a}.box{fill:#121a1e;stroke:#42545c;stroke-width:2}.safe{fill:#102421;stroke:#55d6c2}.gate{fill:#291e0e;stroke:#f1b24a}.line{stroke:#55d6c2;stroke-width:3;fill:none;marker-end:url(#arrow)}.dash{stroke-dasharray:8 8}.n{font:700 12px 'Courier New',monospace;fill:#0d1417}.badge{fill:#55d6c2}
+    </style>
+  </defs>
+  <rect width="1440" height="900" fill="#0d1417"/><rect width="1440" height="900" fill="url(#grid)" opacity=".55"/>
+  <text x="70" y="72" class="label" style="font-size:31px">RUNBOOKPILOT / SYSTEM MAP</text><text x="70" y="103" class="small">Safety-gated SRE autopilot on Qwen Cloud</text>
+  <rect x="70" y="165" width="250" height="130" rx="4" class="box"/><circle cx="102" cy="195" r="13" class="badge"/><text x="98" y="200" class="n">1</text><text x="100" y="238" class="label">GITHUB PAGES</text><text x="100" y="267" class="small">React operator console</text>
+  <rect x="410" y="150" width="590" height="585" rx="5" class="box"/><text x="445" y="190" class="mono">ALIBABA CLOUD FUNCTION COMPUTE</text><text x="445" y="220" class="small">Node.js 20 custom runtime / Hono API</text>
+  <rect x="445" y="260" width="240" height="130" rx="4" class="safe"/><text x="470" y="300" class="label">ORCHESTRATOR</text><text x="470" y="330" class="small">Bounded tool loop</text><text x="470" y="354" class="small">Structured output only</text>
+  <rect x="740" y="260" width="225" height="130" rx="4" class="box"/><text x="765" y="300" class="label">QWEN CLOUD</text><text x="765" y="330" class="small">qwen3.7-plus</text><text x="765" y="354" class="small">qwen3.6-flash review</text>
+  <rect x="445" y="445" width="240" height="120" rx="4" class="box"/><text x="470" y="485" class="label">MCP CLIENT / SERVER</text><text x="470" y="516" class="small">4 read + 2 change</text><text x="470" y="540" class="small">+ 1 verification tool</text>
+  <rect x="740" y="445" width="225" height="120" rx="4" class="gate"/><text x="765" y="485" class="label">POLICY ENGINE</text><text x="765" y="516" class="small">Tool + target allowlist</text><text x="765" y="540" class="small">Evidence consistency</text>
+  <rect x="740" y="610" width="225" height="90" rx="4" class="gate"/><text x="765" y="650" class="label">HUMAN APPROVAL</text><text x="765" y="679" class="small">Signed, 5 min, idempotent</text>
+  <rect x="1090" y="330" width="280" height="270" rx="5" class="safe"/><text x="1120" y="372" class="mono">DETERMINISTIC SANDBOX</text><text x="1120" y="414" class="label">METRICS</text><text x="1120" y="446" class="label">UNTRUSTED LOGS</text><text x="1120" y="478" class="label">DEPLOYMENTS</text><text x="1120" y="510" class="label">DEPENDENCIES</text><text x="1120" y="542" class="label">SAFE MUTATIONS</text><text x="1120" y="578" class="small">No production connection</text>
+  <path d="M320 230H410" class="line"/><path d="M685 325H740" class="line"/><path d="M740 360H685" class="line dash"/><path d="M565 390V445" class="line"/><path d="M685 505H740" class="line"/><path d="M852 565V610" class="line"/><path d="M965 655H1040V540H1090" class="line"/><path d="M1090 420H1018V325H965" class="line dash"/><path d="M1090 505H1005" class="line dash"/>
+  <text x="70" y="815" class="mono">READ PATH</text><line x1="165" y1="810" x2="260" y2="810" class="line"/><text x="330" y="815" class="mono">APPROVAL GATE</text><rect x="470" y="791" width="75" height="26" class="gate"/><text x="620" y="815" class="mono">TRUST RULE</text><text x="730" y="815" class="small">Model proposes. Policy decides. Human authorizes. Health check verifies.</text>
+</svg>

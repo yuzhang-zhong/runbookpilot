@@ -1,0 +1,11 @@
+.git
+.github
+apps/web
+artifacts
+coverage
+docs
+node_modules/.cache
+submission
+tests
+**/*.test.*
+**/*.map

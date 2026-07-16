@@ -1,0 +1,15 @@
+At 2:14 PM, checkout latency jumps above two seconds and errors hit eighteen percent. A release landed six minutes earlier. RunbookPilot investigates the incident, but it cannot change a real production system. This entire demo uses a labeled deterministic SRE sandbox.
+
+The console runs on GitHub Pages. Its API runs on Alibaba Cloud Function Compute. Qwen gathers evidence through an in-process MCP client and server. Read tools can run automatically. A deterministic policy checks every proposed change, and a human must approve before a mutation tool is unlocked.
+
+I start the bad-release scenario. RunbookPilot queries metrics, searches untrusted logs, inspects the deployment, and checks dependencies. The trace stays visible. Qwen returns a structured diagnosis instead of hidden reasoning: checkout version 2.4.1 introduced a connection-pool regression. The timing, error signature, and healthy dependencies support a rollback to 2.4.0.
+
+Now the agent stops. The policy confirms that rollback is allowlisted, targets only checkout-api, and matches the collected evidence. The approval binds that exact action to a five-minute HMAC-signed token and an idempotency key. Qwen cannot create or bypass this authorization.
+
+I approve the rollback. The MCP server verifies that approval was established, applies the sandbox change, and runs three health probes. Error rate falls from eighteen point four to zero point seven percent. P95 latency returns from two thousand eight hundred forty to two hundred thirty-eight milliseconds. Recovery is verified.
+
+The repository includes eight repeatable cases, including dependency failure, noisy alerts, and prompt injection inside a log line. Direct mutation calls, forged tokens, expired tokens, altered targets, and duplicate approvals are tested. The current offline sandbox evaluation records one hundred percent expected root-cause and action matches, plus one hundred percent hostile-target blocking across eight fixtures. It reports zero model tokens because it is not presented as a Qwen cloud benchmark.
+
+The Function Compute deployment, health response, architecture, tests, evaluation data, and MIT source are all public with the submission. RunbookPilot shows a narrow, inspectable form of autonomy: the model investigates and proposes; policy decides; a person authorizes; verification closes the incident.
+
+This video uses AI-generated narration from OpenAI TTS.

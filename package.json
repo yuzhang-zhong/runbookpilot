@@ -1,0 +1,31 @@
+{
+  "name": "runbookpilot",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@10.13.1",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "pnpm --filter @runbookpilot/core build && pnpm --filter @runbookpilot/api build && pnpm --filter @runbookpilot/web build",
+    "dev": "pnpm --parallel --filter @runbookpilot/api --filter @runbookpilot/web dev",
+    "test": "pnpm --filter @runbookpilot/core build && vitest run",
+    "test:watch": "vitest",
+    "test:e2e": "pnpm build && tsx scripts/run-e2e.ts",
+    "typecheck": "pnpm --filter @runbookpilot/core build && pnpm --filter @runbookpilot/api typecheck && pnpm --filter @runbookpilot/web typecheck",
+    "eval": "tsx scripts/evaluate.ts",
+    "demo:tts": "tsx scripts/generate-demo-tts.ts",
+    "demo:mux": "tsx scripts/mux-demo.ts",
+    "check": "pnpm typecheck && pnpm test && pnpm build"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.61.1",
+    "@types/node": "22.15.30",
+    "ffmpeg-static": "5.2.0",
+    "openai": "5.8.2",
+    "tsx": "4.20.3",
+    "typescript": "5.8.3",
+    "vitest": "4.1.10"
+  }
+}

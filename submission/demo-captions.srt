@@ -1,0 +1,27 @@
+1
+00:00:00,000 --> 00:00:20,000
+At 2:14 PM, checkout latency jumps above two seconds and errors hit eighteen percent. A release landed six minutes earlier. This demo uses a labeled deterministic SRE sandbox.
+
+2
+00:00:20,000 --> 00:00:45,000
+The console runs on GitHub Pages. The API runs on Alibaba Cloud Function Compute. Qwen gathers evidence through MCP. Policy and human approval guard every change.
+
+3
+00:00:45,000 --> 00:01:12,000
+RunbookPilot queries metrics, searches untrusted logs, inspects the deployment, and checks dependencies. Qwen returns a structured, evidence-backed diagnosis.
+
+4
+00:01:12,000 --> 00:01:38,000
+The agent stops at the change boundary. Policy checks the tool, exact target, and evidence. Approval is signed, expires in five minutes, and carries an idempotency key.
+
+5
+00:01:38,000 --> 00:02:10,000
+After approval, the MCP server applies the sandbox rollback and verifies three health probes. Error rate and latency return to healthy levels.
+
+6
+00:02:10,000 --> 00:02:35,000
+Eight fixtures cover operational and adversarial cases. The offline evaluation reports sandbox contract results separately from Qwen Cloud metrics.
+
+7
+00:02:35,000 --> 00:02:45,000
+The deployment proof, architecture, tests, data, and MIT source are public. AI-generated narration by OpenAI TTS.
