@@ -1,3 +1,4 @@
+import "dotenv/config";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import OpenAI from "openai";
 

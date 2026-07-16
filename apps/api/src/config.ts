@@ -1,3 +1,5 @@
+import "dotenv/config";
+
 export interface AppConfig {
   qwenApiKey?: string;
   qwenBaseUrl: string;
