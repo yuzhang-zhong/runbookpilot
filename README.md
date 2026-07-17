@@ -4,6 +4,8 @@ RunbookPilot is a safety-gated SRE incident agent built for Track 4 of the Qwen 
 
 The project does not connect to a real production cluster. Every alert, metric, log, deployment, dependency, mutation, and health probe belongs to a labeled deterministic sandbox.
 
+**Live deterministic demo:** https://yuzhang-zhong.github.io/runbookpilot/
+
 ![RunbookPilot architecture](docs/architecture.svg)
 
 ## What is implemented
@@ -60,14 +62,14 @@ See [deployment instructions](docs/deployment.md), [security model](docs/securit
 
 ## Demo narration
 
-The narration script is generated with the official OpenAI speech API and the `gpt-4o-mini-tts` model using the `marin` voice.
+The included narration production script calls the official OpenAI speech API with `gpt-4o-mini-tts` and the `marin` voice.
 
 ```bash
 pnpm demo:tts
 pnpm demo:mux -- --screen artifacts/screen-recording.mp4
 ```
 
-The final video discloses that its narration is AI generated. It contains no music or third-party footage.
+The planned final video discloses that its narration is AI generated. It contains no music or third-party footage.
 
 ## License
 
