@@ -1,10 +1,12 @@
 # Submission checklist
 
+Submitted project: https://devpost.com/software/runbookpilot
+
 ## Identity and track
 
-- [ ] Registered on Devpost before the deadline
-- [ ] Track 4 selected
-- [ ] Individual submission confirmed
+- [x] Registered on Devpost before the deadline
+- [x] Track 4 selected
+- [x] Individual submission confirmed
 
 ## Public deliverables
 
@@ -14,8 +16,8 @@
 - [ ] `/api/health` reports Qwen configured without exposing a secret
 - [x] Architecture SVG renders from the repository
 - [x] Evaluation result matches the latest command output
-- [ ] Build article is public and linked
-- [ ] YouTube video is public, under three minutes, and includes the AI narration disclosure
+- [x] Build article is public and linked
+- [x] YouTube video is public, under three minutes, and includes the AI narration disclosure
 - [x] Local 2:47 demo MP4 passes full video/audio decode and key-frame review
 
 ## Alibaba Cloud proof
@@ -34,8 +36,8 @@
 - [ ] No browser console errors
 - [ ] CORS allows only the Pages origin
 - [x] No secrets in tracked files or build output
-- [ ] Devpost English copy matches `devpost-final.md`
-- [ ] Submission completed at least four hours before deadline
+- [x] Devpost English copy matches the final reviewed story
+- [x] Submission completed at least four hours before deadline
 
 ## Cleanup
 

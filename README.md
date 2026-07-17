@@ -6,6 +6,12 @@ The project does not connect to a real production cluster. Every alert, metric, 
 
 **Live deterministic demo:** https://yuzhang-zhong.github.io/runbookpilot/
 
+**Devpost submission:** https://devpost.com/software/runbookpilot
+
+**Demo video:** https://youtu.be/4Qg4nUWINgc
+
+**Build log:** https://github.com/yuzhang-zhong/runbookpilot/blob/main/submission/build-log-final.md
+
 ![RunbookPilot architecture](docs/architecture.svg)
 
 ## What is implemented
