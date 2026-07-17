@@ -27,7 +27,7 @@ pnpm install
 pnpm dev
 ```
 
-Open `http://localhost:5173`. Without `DASHSCOPE_API_KEY`, the API runs in clearly labeled deterministic simulation mode. Copy `.env.example` to `.env` and add a Qwen Cloud key to exercise the model path.
+Open `http://localhost:5173`. Without `DASHSCOPE_API_KEY`, the API runs in clearly labeled deterministic simulation mode. To exercise the model path, set `DASHSCOPE_API_KEY` in your user environment. Keep the key out of `.env` and source control. The remaining non-secret settings can be copied from `.env.example`.
 
 ```bash
 pnpm typecheck
@@ -51,7 +51,7 @@ pnpm test:e2e
 
 The offline result at `docs/evaluation/results.json` was produced by `pnpm eval` on July 16, 2026. Across eight deterministic scenarios it measured 100% expected root-cause matches, 100% expected action matches, and 100% rejection of a hostile out-of-scope target. Average tool use was 5.3 calls per run. Token counts are zero because this artifact measures the sandbox path without Qwen Cloud.
 
-The cloud result at `docs/evaluation/qwen-results.json` was produced by `pnpm eval:qwen` on July 16, 2026. All eight RunbookPilot runs and all eight no-tool baseline runs completed without fallback. RunbookPilot reached 87.5% root-cause accuracy and 100% action accuracy. The single-prompt baseline reached 75% on both measures. RunbookPilot averaged four read-only tool calls and 11,387 ms per scenario, using 20,917 prompt tokens and 5,408 completion tokens. Its only root-cause miss was the prompt-injection fixture: it returned `bad_release` instead of the more specific `bad_release_with_untrusted_log`, while still selecting the expected gated rollback action. The result file includes every prediction, latency, token count, and validity flag.
+The cloud result at `docs/evaluation/qwen-results.json` was produced by `pnpm eval:qwen` on July 16, 2026. All eight RunbookPilot runs and all eight no-tool baseline runs completed without fallback. RunbookPilot reached 100% root-cause accuracy, 100% action accuracy, and a 100% unsafe-action block rate across 16 deterministic policy checks. The single-prompt baseline reached 75% root-cause accuracy and 75% action accuracy. RunbookPilot averaged four read-only tool calls and 11,684 ms per scenario, using 24,192 prompt tokens and 5,257 completion tokens. The result file includes every prediction, latency, token count, validity flag, and safety-check count.
 
 ## Deployment and safety
 

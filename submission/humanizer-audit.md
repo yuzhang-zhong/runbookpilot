@@ -24,7 +24,7 @@ Prompt used: **What makes the below so obviously AI generated?**
 
 - Start with the exact moment where automation must stop: a plausible rollback proposal.
 - Replace abstract benefits with tool names, token fields, policy checks, and measured results.
-- State that the current checked-in benchmark is offline and uses zero model tokens.
+- Separate the deterministic fixture contract from the final Qwen Cloud comparison and report both with their actual token counts.
 - Use varied paragraph lengths and direct sentences.
 - Remove template-like summaries, inflated adjectives, vague attribution, and dash-heavy asides.
 - End with a narrow, technically honest next step.

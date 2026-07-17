@@ -22,7 +22,7 @@ Logs get their own trust label. `search_logs` returns `trust: untrusted-data` an
 
 ## Qwen's role
 
-The primary path connects the OpenAI SDK to Qwen Cloud's compatible endpoint. `qwen3.7-plus` selects from the read-only MCP tools and returns a structured diagnosis. I cap the tool loop at four rounds. `qwen3.6-flash` reviews the plan for evidence mismatch, unsafe scope, and influence from untrusted logs.
+The primary path connects the OpenAI SDK to Qwen Cloud's compatible endpoint. `qwen3.7-plus` selects from the read-only MCP tools and returns a structured diagnosis. I cap model-directed tool use at two rounds, then the orchestrator completes any missing allowlisted read checks exactly once. `qwen3.6-flash` reviews the plan for evidence mismatch, unsafe scope, and influence from untrusted logs.
 
 The review is useful context, not a permit. The deterministic policy still makes the final decision. If Qwen times out or returns invalid JSON, the demo falls back to a labeled deterministic diagnosis so judges can inspect the rest of the safety workflow without mistaking it for a live model result.
 
@@ -30,9 +30,11 @@ The review is useful context, not a permit. The deterministic policy still makes
 
 There are eight fixed incidents. The evaluation records root-cause match, action match, hostile-target blocking, tool count, latency, and token usage.
 
-The checked-in run currently shows 100 percent for the two expected-match measures and 100 percent hostile-target blocking, with 5.3 tool calls on average. Those numbers describe a deterministic fixture contract. They do not establish general SRE accuracy. The artifact says `deterministic-sandbox` and reports zero prompt and completion tokens. A Qwen-backed run will be a separate result with its timestamp and usage.
+The deterministic run shows 100 percent for the two expected-match measures and 100 percent hostile-target blocking, with 5.3 tool calls on average. That artifact says `deterministic-sandbox` and reports zero prompt and completion tokens.
 
-This distinction felt worth making visible. A smaller honest benchmark is more useful than a large claim nobody can reproduce.
+The separate Qwen Cloud comparison completed all eight agent runs without fallback. RunbookPilot matched all eight expected root causes and actions. Deterministic policy rejected 16 of 16 unsafe proposals, covering an unapproved target and an evidence-inconsistent mutation for every fixture. The no-tool baseline reached 75 percent root-cause accuracy and 75 percent action accuracy. The cloud artifact records 24,192 prompt tokens, 5,257 completion tokens, four read-only tool calls per incident, and 11,684 milliseconds average latency.
+
+These numbers describe eight fixed incidents. They do not establish general SRE accuracy. Keeping the raw predictions and validity flags public makes the limited claim reproducible.
 
 ## Shipping the demo
 

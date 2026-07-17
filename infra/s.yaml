@@ -3,7 +3,7 @@ name: runbookpilot
 access: default
 
 vars:
-  region: ${env('FC_REGION', 'us-west-1')}
+  region: ${env('FC_REGION', 'ap-southeast-1')}
 
 resources:
   api:

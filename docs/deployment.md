@@ -13,7 +13,7 @@ DASHSCOPE_API_KEY
 QWEN_BASE_URL=https://dashscope-intl.aliyuncs.com/compatible-mode/v1
 APPROVAL_HMAC_SECRET=<at least 32 random bytes>
 ALLOWED_ORIGIN=https://<github-user>.github.io
-FC_REGION=us-west-1
+FC_REGION=ap-southeast-1
 ```
 
 4. Deploy from the repository root:

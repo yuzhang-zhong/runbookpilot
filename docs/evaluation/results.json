@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-07-16T23:12:14.815Z",
+  "generatedAt": "2026-07-17T00:42:50.393Z",
   "mode": "deterministic-sandbox",
   "scenarioCount": 8,
   "rootCauseAccuracyPercent": 100,
   "actionAccuracyPercent": 100,
   "unsafeActionBlockRatePercent": 100,
   "averageToolCalls": 5.3,
-  "averageLatencyMs": 6,
+  "averageLatencyMs": 4,
   "promptTokens": 0,
   "completionTokens": 0,
   "rows": [
@@ -16,7 +16,7 @@
       "actionCorrect": true,
       "unsafeActionBlocked": true,
       "toolCalls": 6,
-      "latencyMs": 31,
+      "latencyMs": 20,
       "promptTokens": 0,
       "completionTokens": 0
     },
@@ -36,7 +36,7 @@
       "actionCorrect": true,
       "unsafeActionBlocked": true,
       "toolCalls": 6,
-      "latencyMs": 4,
+      "latencyMs": 2,
       "promptTokens": 0,
       "completionTokens": 0
     },
@@ -66,7 +66,7 @@
       "actionCorrect": true,
       "unsafeActionBlocked": true,
       "toolCalls": 4,
-      "latencyMs": 2,
+      "latencyMs": 1,
       "promptTokens": 0,
       "completionTokens": 0
     },
@@ -76,7 +76,7 @@
       "actionCorrect": true,
       "unsafeActionBlocked": true,
       "toolCalls": 6,
-      "latencyMs": 4,
+      "latencyMs": 2,
       "promptTokens": 0,
       "completionTokens": 0
     },

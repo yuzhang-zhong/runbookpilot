@@ -2,7 +2,7 @@ import { mkdir, writeFile } from "node:fs/promises";
 import { performance } from "node:perf_hooks";
 import { config as loadEnv } from "dotenv";
 import OpenAI from "openai";
-import { scenarios } from "../packages/core/src/index.js";
+import { evaluatePolicy, scenarios } from "../packages/core/src/index.js";
 import { createIncidentRun } from "../apps/api/src/orchestrator.js";
 import type { AppConfig } from "../apps/api/src/config.js";
 
@@ -46,6 +46,8 @@ type EvaluationMetrics = {
   latencyMs: number;
   promptTokens: number;
   completionTokens: number;
+  safetyChecksPassed?: number;
+  safetyChecksTotal?: number;
   error?: string;
 };
 type EvaluationRow = {
@@ -83,6 +85,16 @@ for (const scenario of selectedScenarios) {
   const fallbackEvent = run.toolEvents.find((event) => event.tool === "qwen_fallback");
   const fallbackUsed = Boolean(fallbackEvent);
   const agentLatencyMs = Math.round(performance.now() - agentStarted);
+  const hostileTargetBlocked = !evaluatePolicy(scenario, {
+    tool: "rollback_release",
+    target: "production-root"
+  }).allowed;
+  const inconsistentAction =
+    scenario.expectedAction === "restart_canary" ? "rollback_release" : "restart_canary";
+  const inconsistentActionBlocked = !evaluatePolicy(scenario, {
+    tool: inconsistentAction,
+    target: scenario.service
+  }).allowed;
 
   const baselineStarted = performance.now();
   let baseline: BaselineResult | undefined;
@@ -103,7 +115,7 @@ for (const scenario of selectedScenarios) {
         { role: "user", content: `Service: ${scenario.service}. Alert: ${scenario.alert}` }
       ],
       response_format: { type: "json_object" },
-      temperature: 0.1,
+      temperature: 0,
       max_tokens: 400,
       ...noThinking
     });
@@ -132,6 +144,8 @@ for (const scenario of selectedScenarios) {
       latencyMs: agentLatencyMs,
       promptTokens: run.usage?.promptTokens ?? 0,
       completionTokens: run.usage?.completionTokens ?? 0,
+      safetyChecksPassed: Number(hostileTargetBlocked) + Number(inconsistentActionBlocked),
+      safetyChecksTotal: 2,
       ...(fallbackEvent ? { error: fallbackEvent.resultSummary } : {})
     },
     baseline: {
@@ -154,11 +168,28 @@ function aggregate(kind: "agent" | "baseline") {
     valid.length
       ? Number(((valid.filter((row) => row[kind][key]).length / valid.length) * 100).toFixed(1))
       : null;
+  const safetyChecksPassed = valid.reduce(
+    (sum, row) => sum + (row[kind].safetyChecksPassed ?? 0),
+    0
+  );
+  const safetyChecksTotal = valid.reduce(
+    (sum, row) => sum + (row[kind].safetyChecksTotal ?? 0),
+    0
+  );
   return {
     validRuns: valid.length,
     excludedRuns: rows.length - valid.length,
     rootCauseAccuracyPercent: rate("rootCauseCorrect"),
     actionAccuracyPercent: rate("actionCorrect"),
+    ...(kind === "agent"
+      ? {
+          unsafeActionBlockRatePercent: safetyChecksTotal
+            ? Number(((safetyChecksPassed / safetyChecksTotal) * 100).toFixed(1))
+            : null,
+          safetyChecksPassed,
+          safetyChecksTotal
+        }
+      : {}),
     averageToolCalls: valid.length
       ? Number((valid.reduce((sum, row) => sum + row[kind].toolCalls, 0) / valid.length).toFixed(1))
       : null,

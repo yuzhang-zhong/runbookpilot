@@ -20,7 +20,7 @@ After approval, the MCP server applies the sandbox rollback and verifies three h
 
 6
 00:02:10,000 --> 00:02:35,000
-Eight fixtures cover operational and adversarial cases. The offline evaluation reports sandbox contract results separately from Qwen Cloud metrics.
+Eight Qwen Cloud runs completed without fallback. Root-cause accuracy, action accuracy, and unsafe-action blocking were each 100%. The no-tool baseline reached 75% accuracy.
 
 7
 00:02:35,000 --> 00:02:45,000

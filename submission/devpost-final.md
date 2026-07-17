@@ -28,13 +28,13 @@ The frontend is hosted on GitHub Pages. The API runs as a Node.js 20 web functio
 
 The hardest part was keeping model output useful without treating it as authority. Logs can contain realistic attack text, so every log result is labeled untrusted data. Qwen never receives a mutation-capable authorization token. Approval binds the run, action, target, rationale, expiry, and idempotency key under an HMAC signature.
 
-Another challenge was reporting results honestly. The checked-in evaluation runs eight deterministic scenarios and currently records 100% expected root-cause matches, 100% expected action matches, and 100% hostile-target blocking. Those are sandbox contract results, not a claim about general incident accuracy. The artifact records zero model tokens because it was generated in offline simulation mode. Qwen-backed results will be stored separately once the cloud key is configured.
+Another challenge was reporting results honestly. I kept the deterministic fixture contract separate from the Qwen Cloud comparison. In the final cloud run, all eight agent runs completed without fallback. RunbookPilot matched all eight expected root causes and actions, and deterministic policy blocked all 16 unsafe proposals. The no-tool baseline reached 75% on the two accuracy measures. These are results for eight fixed sandbox incidents, not a claim about general incident accuracy. The repository includes each prediction, latency, token count, and validity flag.
 
 ## Accomplishments
 
 The complete bad-release path works through the public API: four evidence calls, a bounded diagnosis, policy review, a signed approval gate, rollback, and health verification. Direct MCP mutation calls fail without approval. Forged, altered, and expired tokens fail closed. Repeated approval keeps the same logical action and idempotency key.
 
-Eleven automated tests currently cover policy, tokens, MCP behavior, prompt injection, duplicate approval, and the full recovery flow. Strict type checking and the production build also pass.
+Twelve automated tests cover policy, tokens, MCP behavior, prompt injection, duplicate approval, and the full recovery flow. Four Playwright tests exercise the desktop and mobile operator paths and keyboard access. Strict type checking and the production build also pass.
 
 ## What I learned
 
