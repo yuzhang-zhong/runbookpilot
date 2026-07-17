@@ -1,6 +1,10 @@
 import type { HealthResponse, IncidentRun, IncidentScenario } from "@runbookpilot/core";
+import { demoApi } from "./demo-api.js";
 
 const API_BASE = (import.meta.env.VITE_API_BASE_URL as string | undefined)?.replace(/\/$/, "") ?? "";
+const STATIC_DEMO =
+  API_BASE === "demo" ||
+  (!API_BASE && typeof window !== "undefined" && window.location.hostname.endsWith(".github.io"));
 
 async function request<T>(path: string, init?: RequestInit): Promise<T> {
   const response = await fetch(`${API_BASE}${path}`, {
@@ -15,17 +19,23 @@ async function request<T>(path: string, init?: RequestInit): Promise<T> {
 }
 
 export const api = {
-  health: () => request<HealthResponse>("/api/health"),
+  health: () => (STATIC_DEMO ? demoApi.health() : request<HealthResponse>("/api/health")),
   scenarios: async () =>
-    (await request<{ scenarios: IncidentScenario[] }>("/api/scenarios")).scenarios,
+    STATIC_DEMO
+      ? demoApi.scenarios()
+      : (await request<{ scenarios: IncidentScenario[] }>("/api/scenarios")).scenarios,
   createRun: (scenarioId: string) =>
-    request<IncidentRun>("/api/runs", {
-      method: "POST",
-      body: JSON.stringify({ scenarioId })
-    }),
+    STATIC_DEMO
+      ? demoApi.createRun(scenarioId)
+      : request<IncidentRun>("/api/runs", {
+          method: "POST",
+          body: JSON.stringify({ scenarioId })
+        }),
   approve: (approvalToken: string) =>
-    request<IncidentRun>("/api/runs/approve", {
-      method: "POST",
-      body: JSON.stringify({ approvalToken })
-    })
+    STATIC_DEMO
+      ? demoApi.approve(approvalToken)
+      : request<IncidentRun>("/api/runs/approve", {
+          method: "POST",
+          body: JSON.stringify({ approvalToken })
+        })
 };

@@ -1,6 +1,6 @@
 At 2:14 PM, checkout latency jumps above two seconds and errors hit eighteen percent. A release landed six minutes earlier. RunbookPilot investigates the incident, but it cannot change a real production system. This entire demo uses a labeled deterministic SRE sandbox.
 
-The console runs on GitHub Pages. Its API runs on Alibaba Cloud Function Compute. Qwen gathers evidence through an in-process MCP client and server. Read tools can run automatically. A deterministic policy checks every proposed change, and a human must approve before a mutation tool is unlocked.
+The console runs on GitHub Pages in a clearly labeled deterministic sandbox. The production-shaped Hono API has a Function Compute deployment definition, but I did not create a billable function after the checkout showed a nine-dollar charge. Real Qwen Cloud calls are captured in the evaluation artifact. Qwen gathers evidence through an in-process MCP client and server. Read tools can run automatically. A deterministic policy checks every proposed change, and a human must approve before a mutation tool is unlocked.
 
 I start the bad-release scenario. RunbookPilot queries metrics, searches untrusted logs, inspects the deployment, and checks dependencies. The trace stays visible. Qwen returns a structured diagnosis instead of hidden reasoning: release 2026.07.16.4 removed a guard around the tier multiplier lookup. The timing, error signature, and healthy dependencies support a rollback to the previous release.
 
@@ -10,6 +10,6 @@ I approve the rollback. The MCP server verifies that approval was established, a
 
 The repository includes eight repeatable cases, including dependency failure, noisy alerts, and prompt injection inside a log line. Direct mutation calls, forged tokens, expired tokens, altered targets, and duplicate approvals are tested. In the final Qwen Cloud run, all eight incidents completed without fallback. Root-cause accuracy, action accuracy, and unsafe-action blocking were each one hundred percent. The no-tool baseline reached seventy-five percent root-cause and action accuracy. These are fixed sandbox results, not a claim about general production incidents.
 
-The Function Compute deployment, health response, architecture, tests, evaluation data, and MIT source are all public with the submission. RunbookPilot shows a narrow, inspectable form of autonomy: the model investigates and proposes; policy decides; a person authorizes; verification closes the incident.
+The Function Compute definition, architecture, tests, evaluation data, and MIT source are all public with the submission. RunbookPilot shows a narrow, inspectable form of autonomy: the model investigates and proposes; policy decides; a person authorizes; verification closes the incident.
 
 This video uses AI-generated narration from OpenAI TTS.

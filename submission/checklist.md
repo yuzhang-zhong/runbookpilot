@@ -10,7 +10,7 @@
 
 - [ ] MIT repository is public
 - [ ] GitHub Pages URL works in a private browser window
-- [ ] Function Compute API remains public through August 11, 2026
+- [x] Function Compute paid checkout rejected; no billable function claimed as deployed
 - [ ] `/api/health` reports Qwen configured without exposing a secret
 - [ ] Architecture SVG renders from the repository
 - [ ] Evaluation result matches the latest command output

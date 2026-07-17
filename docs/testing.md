@@ -6,6 +6,8 @@
 
 `pnpm typecheck` validates all packages in strict TypeScript mode. `pnpm build` produces the API and GitHub Pages artifacts. `pnpm test:e2e` exercises the primary desktop and mobile operator flow in Chrome and checks keyboard focus.
 
+The unit and integration suite contains 14 tests, including two checks for the static Pages demo: one verifies that mutation remains behind approval and recovery is verified, and one confirms that a dependency outage does not invent a local change.
+
 ## Evaluation contract
 
 `pnpm eval` runs all eight fixed incidents. It records expected root cause and action matches, hostile-target blocking, tool count, latency, and model token usage. The script never substitutes invented numbers for missing Qwen usage. Offline runs report zero model tokens and identify their mode as `deterministic-sandbox`.

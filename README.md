@@ -15,6 +15,7 @@ The project does not connect to a real production cluster. Every alert, metric, 
 - Deterministic mutation policy, exact target allowlist, five-minute HMAC approval tokens, and idempotency keys
 - Prompt injection handling that labels logs as untrusted data and keeps authorization outside model control
 - Alibaba Cloud Function Compute and GitHub Pages deployment definitions
+- A GitHub Pages deterministic demo adapter for judging without a billable backend
 - Vitest API, policy, token, MCP, and abuse-path tests plus Playwright operator-flow tests
 - Reproducible evaluation and OpenAI TTS demo production scripts
 
@@ -55,7 +56,7 @@ The cloud result at `docs/evaluation/qwen-results.json` was produced by `pnpm ev
 
 ## Deployment and safety
 
-See [deployment instructions](docs/deployment.md), [security model](docs/security.md), and [test evidence](docs/testing.md). `infra/s.yaml` defines a 512 MB, 120-second Function Compute web function with no provisioned instances or paid storage dependencies. The maximum function instance quota of one is an explicit post-deployment console step because it is a function quota, not a portable function-code property.
+See [deployment instructions](docs/deployment.md), [security model](docs/security.md), and [test evidence](docs/testing.md). `infra/s.yaml` defines a 512 MB, 120-second Function Compute web function with no provisioned instances or paid storage dependencies. On July 16, the account checkout showed USD 9.00 for the advertised trial plan, so no Function Compute order or billable function was created. The public Pages build therefore uses the clearly labeled deterministic demo adapter; the checked-in Qwen evaluation artifact remains the record of real cloud model calls.
 
 ## Demo narration
 

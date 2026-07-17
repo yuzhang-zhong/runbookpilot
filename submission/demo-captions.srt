@@ -4,7 +4,7 @@ At 2:14 PM, checkout latency jumps above two seconds and errors hit eighteen per
 
 2
 00:00:20,000 --> 00:00:45,000
-The console runs on GitHub Pages. The API runs on Alibaba Cloud Function Compute. Qwen gathers evidence through MCP. Policy and human approval guard every change.
+The console runs on GitHub Pages as a labeled deterministic sandbox. A Function Compute definition is included, but no billable function was created. Real Qwen calls are recorded in the evaluation artifact.
 
 3
 00:00:45,000 --> 00:01:12,000
@@ -24,4 +24,4 @@ Eight Qwen Cloud runs completed without fallback. Root-cause accuracy, action ac
 
 7
 00:02:35,000 --> 00:02:45,000
-The deployment proof, architecture, tests, data, and MIT source are public. AI-generated narration by OpenAI TTS.
+The deployment definition, architecture, tests, data, and MIT source are public. AI-generated narration by OpenAI TTS.

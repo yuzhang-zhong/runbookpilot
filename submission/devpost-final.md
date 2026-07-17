@@ -22,7 +22,7 @@ The monorepo uses React 19, Vite, Hono, Zod, TypeScript, Vitest, and Playwright.
 
 The MCP layer is a real in-process client and server, not a mocked function registry. It exposes four read tools, two mutation tools, and one verification tool. Mutation calls fail inside the MCP server unless the orchestrator has already verified human approval.
 
-The frontend is hosted on GitHub Pages. The API runs as a Node.js 20 web function on Alibaba Cloud Function Compute. The repository includes the `fc3` deployment definition, exact environment variables, CORS restriction, and shutdown runbook.
+The public frontend is hosted on GitHub Pages. It uses a clearly labeled deterministic browser adapter for the interactive judging path. The repository also contains a deployable Node.js 20 Function Compute definition, exact environment variables, CORS restriction, and shutdown runbook. I did not claim that function as deployed: the Alibaba Cloud checkout showed USD 9.00 for the advertised trial plan, so I stopped before ordering or creating a billable function. Real Qwen Cloud calls are documented separately in the checked-in evaluation artifact.
 
 ## Challenges
 
@@ -34,7 +34,7 @@ Another challenge was reporting results honestly. I kept the deterministic fixtu
 
 The complete bad-release path works through the public API: four evidence calls, a bounded diagnosis, policy review, a signed approval gate, rollback, and health verification. Direct MCP mutation calls fail without approval. Forged, altered, and expired tokens fail closed. Repeated approval keeps the same logical action and idempotency key.
 
-Twelve automated tests cover policy, tokens, MCP behavior, prompt injection, duplicate approval, and the full recovery flow. Four Playwright tests exercise the desktop and mobile operator paths and keyboard access. Strict type checking and the production build also pass.
+Fourteen automated tests cover policy, tokens, MCP behavior, prompt injection, duplicate approval, the full recovery flow, and the static demo adapter. Four Playwright tests exercise the desktop and mobile operator paths and keyboard access. Strict type checking and the production build also pass.
 
 ## What I learned
 
@@ -48,4 +48,4 @@ Before connecting any real system, I would add a durable idempotency store, shor
 
 ## Built with
 
-Qwen Cloud, Alibaba Cloud Function Compute, TypeScript, React, Vite, Hono, MCP, Zod, Vitest, Playwright, GitHub Pages, OpenAI TTS, and ffmpeg.
+Qwen Cloud, Alibaba Cloud Function Compute deployment definitions, TypeScript, React, Vite, Hono, MCP, Zod, Vitest, Playwright, GitHub Pages, OpenAI TTS, and ffmpeg.

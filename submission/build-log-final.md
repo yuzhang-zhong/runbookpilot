@@ -40,7 +40,7 @@ These numbers describe eight fixed incidents. They do not establish general SRE 
 
 The operator console is React and Vite. It keeps the alert, metrics, evidence, tool trace, policy result, approval request, and recovery probes on one screen. Status changes use `aria-live`; controls work by keyboard; the layout collapses for a phone; reduced-motion preferences disable nonessential animation.
 
-The static console is prepared for GitHub Pages. The Hono API is prepared for a 512 MB Alibaba Cloud Function Compute web function using the Node.js 20 custom runtime. The deployment creates no OSS or NAS mount and no provisioned instance. A separate console step caps the function at one on-demand instance.
+The static console is deployed through GitHub Pages and includes a deterministic browser adapter for the public walkthrough. The Hono API is prepared for a 512 MB Alibaba Cloud Function Compute web function using the Node.js 20 custom runtime. The definition creates no OSS or NAS mount and no provisioned instance. I stopped before deployment because the account checkout showed USD 9.00 for the advertised trial plan. The public demo and README state that limitation directly.
 
 For the three-minute video, the repository contains the narration, captions, OpenAI `gpt-4o-mini-tts` script using the `marin` voice, and an ffmpeg mux command. The video identifies the narration as AI generated.
 

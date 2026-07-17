@@ -25,6 +25,7 @@ Prompt used: **What makes the below so obviously AI generated?**
 - Start with the exact moment where automation must stop: a plausible rollback proposal.
 - Replace abstract benefits with tool names, token fields, policy checks, and measured results.
 - Separate the deterministic fixture contract from the final Qwen Cloud comparison and report both with their actual token counts.
+- State that Function Compute was not deployed after checkout showed USD 9.00; describe the public Pages adapter as a deterministic demo instead of implying a live backend.
 - Use varied paragraph lengths and direct sentences.
 - Remove template-like summaries, inflated adjectives, vague attribution, and dash-heavy asides.
 - End with a narrow, technically honest next step.
