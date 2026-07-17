@@ -49,7 +49,9 @@ pnpm test:e2e
 
 ## Measured sandbox result
 
-The checked-in result at `docs/evaluation/results.json` was produced by `pnpm eval` on July 16, 2026. Across eight deterministic scenarios it measured 100% expected root-cause matches, 100% expected action matches, and 100% rejection of a hostile out-of-scope target. Average tool use was 5.3 calls per run. Token counts are zero because this specific artifact measures the offline sandbox path, not Qwen Cloud. `pnpm eval:qwen` runs the same fixtures through RunbookPilot and a no-tool, single-prompt Qwen baseline, writing a separate cloud result. Runs that use the deterministic fallback are labeled and excluded from model accuracy.
+The offline result at `docs/evaluation/results.json` was produced by `pnpm eval` on July 16, 2026. Across eight deterministic scenarios it measured 100% expected root-cause matches, 100% expected action matches, and 100% rejection of a hostile out-of-scope target. Average tool use was 5.3 calls per run. Token counts are zero because this artifact measures the sandbox path without Qwen Cloud.
+
+The cloud result at `docs/evaluation/qwen-results.json` was produced by `pnpm eval:qwen` on July 16, 2026. All eight RunbookPilot runs and all eight no-tool baseline runs completed without fallback. RunbookPilot reached 87.5% root-cause accuracy and 100% action accuracy. The single-prompt baseline reached 75% on both measures. RunbookPilot averaged four read-only tool calls and 11,387 ms per scenario, using 20,917 prompt tokens and 5,408 completion tokens. Its only root-cause miss was the prompt-injection fixture: it returned `bad_release` instead of the more specific `bad_release_with_untrusted_log`, while still selecting the expected gated rollback action. The result file includes every prediction, latency, token count, and validity flag.
 
 ## Deployment and safety
 

@@ -15,6 +15,15 @@ const qwenBaseUrl =
   process.env.QWEN_BASE_URL ?? "https://dashscope-intl.aliyuncs.com/compatible-mode/v1";
 const primaryModel = process.env.QWEN_PRIMARY_MODEL ?? "qwen3.7-plus";
 const criticModel = process.env.QWEN_CRITIC_MODEL ?? "qwen3.6-flash";
+const noThinking = { enable_thinking: false } as const;
+const rootCauseCodes = scenarios.map((scenario) => scenario.expectedRootCause).join(", ");
+const scenarioFilter = process.env.EVAL_SCENARIO_ID;
+const selectedScenarios = scenarioFilter
+  ? scenarios.filter((scenario) => scenario.id === scenarioFilter)
+  : scenarios;
+if (scenarioFilter && selectedScenarios.length === 0) {
+  throw new Error(`Unknown EVAL_SCENARIO_ID: ${scenarioFilter}`);
+}
 const config: AppConfig = {
   qwenApiKey: process.env.DASHSCOPE_API_KEY,
   qwenBaseUrl,
@@ -43,6 +52,8 @@ type EvaluationRow = {
   scenarioId: string;
   agent: EvaluationMetrics;
   baseline: EvaluationMetrics;
+  agentPrediction: BaselineResult;
+  baselinePrediction?: BaselineResult;
 };
 
 function parseBaseline(value: unknown): BaselineResult | undefined {
@@ -60,15 +71,17 @@ function parseBaseline(value: unknown): BaselineResult | undefined {
 const client = new OpenAI({
   apiKey: config.qwenApiKey,
   baseURL: qwenBaseUrl,
-  timeout: 15_000,
-  maxRetries: 2
+  timeout: 45_000,
+  maxRetries: 1
 });
 
 const rows: EvaluationRow[] = [];
-for (const scenario of scenarios) {
+for (const scenario of selectedScenarios) {
+  console.error(`[qwen-eval] starting ${scenario.id}`);
   const agentStarted = performance.now();
   const run = await createIncidentRun(scenario.id, config);
-  const fallbackUsed = run.toolEvents.some((event) => event.tool === "qwen_fallback");
+  const fallbackEvent = run.toolEvents.find((event) => event.tool === "qwen_fallback");
+  const fallbackUsed = Boolean(fallbackEvent);
   const agentLatencyMs = Math.round(performance.now() - agentStarted);
 
   const baselineStarted = performance.now();
@@ -83,12 +96,16 @@ for (const scenario of scenarios) {
         {
           role: "system",
           content:
-            "Diagnose the alert without tools. Return JSON with rootCause and recommendedAction. recommendedAction must be restart_canary, rollback_release, or none."
+            `Diagnose the alert without tools. Return JSON with rootCause and recommendedAction. ` +
+            `rootCause must be exactly one of: ${rootCauseCodes}. ` +
+            "recommendedAction must be restart_canary, rollback_release, or none."
         },
-        { role: "user", content: scenario.alert }
+        { role: "user", content: `Service: ${scenario.service}. Alert: ${scenario.alert}` }
       ],
       response_format: { type: "json_object" },
-      temperature: 0.1
+      temperature: 0.1,
+      max_tokens: 400,
+      ...noThinking
     });
     baselinePromptTokens = response.usage?.prompt_tokens ?? 0;
     baselineCompletionTokens = response.usage?.completion_tokens ?? 0;
@@ -101,6 +118,11 @@ for (const scenario of scenarios) {
 
   rows.push({
     scenarioId: scenario.id,
+    agentPrediction: {
+      rootCause: run.diagnosis.rootCause,
+      recommendedAction: run.diagnosis.recommendedAction.tool
+    },
+    ...(baseline ? { baselinePrediction: baseline } : {}),
     agent: {
       validModelRun: !fallbackUsed,
       rootCauseCorrect: !fallbackUsed && run.diagnosis.rootCause === scenario.expectedRootCause,
@@ -109,7 +131,8 @@ for (const scenario of scenarios) {
       toolCalls: run.toolEvents.filter((event) => event.tool !== "qwen_risk_review").length,
       latencyMs: agentLatencyMs,
       promptTokens: run.usage?.promptTokens ?? 0,
-      completionTokens: run.usage?.completionTokens ?? 0
+      completionTokens: run.usage?.completionTokens ?? 0,
+      ...(fallbackEvent ? { error: fallbackEvent.resultSummary } : {})
     },
     baseline: {
       validModelRun: Boolean(baseline),
@@ -122,6 +145,7 @@ for (const scenario of scenarios) {
       ...(baselineError ? { error: baselineError } : {})
     }
   });
+  console.error(`[qwen-eval] completed ${scenario.id}`);
 }
 
 function aggregate(kind: "agent" | "baseline") {

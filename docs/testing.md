@@ -10,7 +10,9 @@
 
 `pnpm eval` runs all eight fixed incidents. It records expected root cause and action matches, hostile-target blocking, tool count, latency, and model token usage. The script never substitutes invented numbers for missing Qwen usage. Offline runs report zero model tokens and identify their mode as `deterministic-sandbox`.
 
-The current measured artifact is stored in `docs/evaluation/results.json`. Any cloud-backed evaluation must be stored as a separate artifact with its model names, timestamp, and nonzero usage data.
+The offline artifact is stored in `docs/evaluation/results.json`. The Qwen Cloud comparison is stored separately in `docs/evaluation/qwen-results.json`. The July 16, 2026 cloud run completed all eight scenarios without fallback. RunbookPilot measured 87.5% root-cause accuracy and 100% action accuracy, compared with 75% and 75% for the no-tool baseline. The cloud artifact records model names, predictions, latency, token usage, and excluded-run counts.
+
+Set `EVAL_SCENARIO_ID` to one scenario ID when debugging a cloud run. For example, `$env:EVAL_SCENARIO_ID='bad-release'; pnpm eval:qwen` runs only that fixture. Omit the variable for the eight-scenario result used in the README.
 
 ## Release gate
 

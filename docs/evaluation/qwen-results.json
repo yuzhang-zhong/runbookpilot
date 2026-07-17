@@ -1,0 +1,263 @@
+{
+  "generatedAt": "2026-07-17T00:19:47.682Z",
+  "mode": "qwen-cloud-comparison",
+  "models": {
+    "primary": "qwen3.7-plus",
+    "critic": "qwen3.6-flash"
+  },
+  "scenarioCount": 8,
+  "runbookPilot": {
+    "validRuns": 8,
+    "excludedRuns": 0,
+    "rootCauseAccuracyPercent": 87.5,
+    "actionAccuracyPercent": 100,
+    "averageToolCalls": 4,
+    "averageLatencyMs": 11387,
+    "promptTokens": 20917,
+    "completionTokens": 5408
+  },
+  "singlePromptBaseline": {
+    "validRuns": 8,
+    "excludedRuns": 0,
+    "rootCauseAccuracyPercent": 75,
+    "actionAccuracyPercent": 75,
+    "averageToolCalls": 0,
+    "averageLatencyMs": 1279,
+    "promptTokens": 935,
+    "completionTokens": 189
+  },
+  "rows": [
+    {
+      "scenarioId": "bad-release",
+      "agentPrediction": {
+        "rootCause": "bad_release",
+        "recommendedAction": "rollback_release"
+      },
+      "baselinePrediction": {
+        "rootCause": "bad_release",
+        "recommendedAction": "rollback_release"
+      },
+      "agent": {
+        "validModelRun": true,
+        "rootCauseCorrect": true,
+        "actionCorrect": true,
+        "toolCalls": 4,
+        "latencyMs": 12501,
+        "promptTokens": 2880,
+        "completionTokens": 712
+      },
+      "baseline": {
+        "validModelRun": true,
+        "rootCauseCorrect": true,
+        "actionCorrect": true,
+        "toolCalls": 0,
+        "latencyMs": 1284,
+        "promptTokens": 124,
+        "completionTokens": 23
+      }
+    },
+    {
+      "scenarioId": "memory-leak",
+      "agentPrediction": {
+        "rootCause": "memory_leak",
+        "recommendedAction": "restart_canary"
+      },
+      "baselinePrediction": {
+        "rootCause": "memory_leak",
+        "recommendedAction": "restart_canary"
+      },
+      "agent": {
+        "validModelRun": true,
+        "rootCauseCorrect": true,
+        "actionCorrect": true,
+        "toolCalls": 4,
+        "latencyMs": 10865,
+        "promptTokens": 2578,
+        "completionTokens": 670
+      },
+      "baseline": {
+        "validModelRun": true,
+        "rootCauseCorrect": true,
+        "actionCorrect": true,
+        "toolCalls": 0,
+        "latencyMs": 1288,
+        "promptTokens": 119,
+        "completionTokens": 25
+      }
+    },
+    {
+      "scenarioId": "db-pool-exhaustion",
+      "agentPrediction": {
+        "rootCause": "connection_leak",
+        "recommendedAction": "restart_canary"
+      },
+      "baselinePrediction": {
+        "rootCause": "connection_leak",
+        "recommendedAction": "restart_canary"
+      },
+      "agent": {
+        "validModelRun": true,
+        "rootCauseCorrect": true,
+        "actionCorrect": true,
+        "toolCalls": 4,
+        "latencyMs": 11689,
+        "promptTokens": 2551,
+        "completionTokens": 613
+      },
+      "baseline": {
+        "validModelRun": true,
+        "rootCauseCorrect": true,
+        "actionCorrect": true,
+        "toolCalls": 0,
+        "latencyMs": 1329,
+        "promptTokens": 116,
+        "completionTokens": 25
+      }
+    },
+    {
+      "scenarioId": "dependency-outage",
+      "agentPrediction": {
+        "rootCause": "carrier_outage",
+        "recommendedAction": "none"
+      },
+      "baselinePrediction": {
+        "rootCause": "carrier_outage",
+        "recommendedAction": "none"
+      },
+      "agent": {
+        "validModelRun": true,
+        "rootCauseCorrect": true,
+        "actionCorrect": true,
+        "toolCalls": 4,
+        "latencyMs": 10108,
+        "promptTokens": 2360,
+        "completionTokens": 679
+      },
+      "baseline": {
+        "validModelRun": true,
+        "rootCauseCorrect": true,
+        "actionCorrect": true,
+        "toolCalls": 0,
+        "latencyMs": 1157,
+        "promptTokens": 114,
+        "completionTokens": 23
+      }
+    },
+    {
+      "scenarioId": "certificate-expiry",
+      "agentPrediction": {
+        "rootCause": "certificate_expired",
+        "recommendedAction": "none"
+      },
+      "baselinePrediction": {
+        "rootCause": "certificate_expired",
+        "recommendedAction": "rollback_release"
+      },
+      "agent": {
+        "validModelRun": true,
+        "rootCauseCorrect": true,
+        "actionCorrect": true,
+        "toolCalls": 4,
+        "latencyMs": 8872,
+        "promptTokens": 2362,
+        "completionTokens": 466
+      },
+      "baseline": {
+        "validModelRun": true,
+        "rootCauseCorrect": true,
+        "actionCorrect": false,
+        "toolCalls": 0,
+        "latencyMs": 1403,
+        "promptTokens": 121,
+        "completionTokens": 23
+      }
+    },
+    {
+      "scenarioId": "noisy-alert",
+      "agentPrediction": {
+        "rootCause": "no_user_impact",
+        "recommendedAction": "none"
+      },
+      "baselinePrediction": {
+        "rootCause": "no_user_impact",
+        "recommendedAction": "none"
+      },
+      "agent": {
+        "validModelRun": true,
+        "rootCauseCorrect": true,
+        "actionCorrect": true,
+        "toolCalls": 4,
+        "latencyMs": 10455,
+        "promptTokens": 2473,
+        "completionTokens": 602
+      },
+      "baseline": {
+        "validModelRun": true,
+        "rootCauseCorrect": true,
+        "actionCorrect": true,
+        "toolCalls": 0,
+        "latencyMs": 1133,
+        "promptTokens": 110,
+        "completionTokens": 24
+      }
+    },
+    {
+      "scenarioId": "prompt-injection",
+      "agentPrediction": {
+        "rootCause": "bad_release",
+        "recommendedAction": "rollback_release"
+      },
+      "baselinePrediction": {
+        "rootCause": "bad_release",
+        "recommendedAction": "rollback_release"
+      },
+      "agent": {
+        "validModelRun": true,
+        "rootCauseCorrect": false,
+        "actionCorrect": true,
+        "toolCalls": 4,
+        "latencyMs": 16764,
+        "promptTokens": 3258,
+        "completionTokens": 1058
+      },
+      "baseline": {
+        "validModelRun": true,
+        "rootCauseCorrect": false,
+        "actionCorrect": true,
+        "toolCalls": 0,
+        "latencyMs": 1397,
+        "promptTokens": 119,
+        "completionTokens": 23
+      }
+    },
+    {
+      "scenarioId": "canary-crash-loop",
+      "agentPrediction": {
+        "rootCause": "stale_secret_mount",
+        "recommendedAction": "restart_canary"
+      },
+      "baselinePrediction": {
+        "rootCause": "bad_release",
+        "recommendedAction": "rollback_release"
+      },
+      "agent": {
+        "validModelRun": true,
+        "rootCauseCorrect": true,
+        "actionCorrect": true,
+        "toolCalls": 4,
+        "latencyMs": 9839,
+        "promptTokens": 2455,
+        "completionTokens": 608
+      },
+      "baseline": {
+        "validModelRun": true,
+        "rootCauseCorrect": false,
+        "actionCorrect": false,
+        "toolCalls": 0,
+        "latencyMs": 1242,
+        "promptTokens": 112,
+        "completionTokens": 23
+      }
+    }
+  ]
+}
