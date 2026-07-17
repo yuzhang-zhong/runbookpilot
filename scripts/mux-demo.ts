@@ -23,7 +23,7 @@ const ffmpegArgs = [
   "-i",
   voice,
   "-vf",
-  `subtitles=${captions.replace(/\\/g, "/").replace(":", "\\:")}`,
+  `subtitles=${captions.replace(/\\/g, "/").replace(":", "\\:")}:force_style='FontName=Arial,FontSize=10,PrimaryColour=&H00FFFFFF,OutlineColour=&H00000000,BorderStyle=1,Outline=1,Shadow=0,MarginV=10,Alignment=2'`,
   "-map",
   "0:v:0",
   "-map",

@@ -108,14 +108,14 @@ export const demoApi = {
       toolEvents: [
         ...run.toolEvents,
         event(action, "mutate", `${action.replaceAll("_", " ")} completed with the approved target and idempotency key.`, 5),
-        event("verify_health", "verify", "Error rate, latency, and saturation returned to the healthy envelope.", 6)
+        event("verify_health", "verify", "Three bounded probes confirmed healthy error rate, latency, and saturation.", 6)
       ],
       outcome: {
         recovered: true,
         service: approvedTarget,
         action,
         before: { errorRate: 18.4, p95LatencyMs: 2840 },
-        after: { errorRate: 0.6, p95LatencyMs: 238 },
+        after: { errorRate: 0.7, p95LatencyMs: 238 },
         summary: "The sandbox mutation completed once, and an independent health check verified recovery.",
         idempotencyKey: `demo-${run.scenarioId}-${action}`
       }

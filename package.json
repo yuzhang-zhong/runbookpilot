@@ -17,6 +17,7 @@
     "eval": "tsx scripts/evaluate.ts",
     "eval:qwen": "tsx scripts/evaluate-qwen.ts",
     "demo:tts": "tsx scripts/generate-demo-tts.ts",
+    "demo:record": "tsx scripts/record-demo.ts",
     "demo:mux": "tsx scripts/mux-demo.ts",
     "check": "pnpm typecheck && pnpm test && pnpm build"
   },
@@ -26,6 +27,7 @@
     "dotenv": "^17.4.2",
     "ffmpeg-static": "5.2.0",
     "openai": "5.8.2",
+    "playwright": "1.61.1",
     "tsx": "4.20.3",
     "typescript": "5.8.3",
     "vitest": "4.1.10"

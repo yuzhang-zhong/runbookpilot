@@ -23,6 +23,9 @@ importers:
       openai:
         specifier: 5.8.2
         version: 5.8.2(zod@3.25.67)
+      playwright:
+        specifier: 1.61.1
+        version: 1.61.1
       tsx:
         specifier: 4.20.3
         version: 4.20.3

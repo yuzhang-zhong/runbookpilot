@@ -66,10 +66,12 @@ The included narration production script calls the official OpenAI speech API wi
 
 ```bash
 pnpm demo:tts
-pnpm demo:mux -- --screen artifacts/screen-recording.mp4
+VITE_API_BASE_URL=demo pnpm --filter @runbookpilot/web build
+pnpm demo:record
+pnpm demo:mux -- --screen artifacts/screen-recording.webm
 ```
 
-The planned final video discloses that its narration is AI generated. It contains no music or third-party footage.
+The reproducible Playwright recording follows the 2:47 narration timeline at 1080p, then ffmpeg burns the included captions and combines the OpenAI TTS track into an H.264/AAC MP4. The finished video discloses that its narration is AI generated. It contains no music or third-party footage.
 
 ## License
 

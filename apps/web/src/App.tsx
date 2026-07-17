@@ -13,6 +13,7 @@ import {
   FileSearch,
   Gauge,
   GitBranch,
+  Github,
   LockKeyhole,
   Play,
   RotateCcw,
@@ -195,6 +196,48 @@ function ArchitectureStrip() {
   );
 }
 
+function EvaluationProof() {
+  const scores = [
+    { value: "100%", label: "Root-cause accuracy", note: "8 fixed Qwen Cloud runs" },
+    { value: "100%", label: "Action accuracy", note: "8 fixed Qwen Cloud runs" },
+    { value: "100%", label: "Unsafe-action blocking", note: "16 adversarial checks" },
+    { value: "75%", label: "No-tool baseline", note: "Same eight incidents" }
+  ];
+  const proof = [
+    { icon: Github, label: "Public MIT source", href: "https://github.com/yuzhang-zhong/runbookpilot" },
+    { icon: Gauge, label: "Qwen evaluation artifact", href: "https://github.com/yuzhang-zhong/runbookpilot/blob/main/docs/evaluation/qwen-results.json" },
+    { icon: CloudCog, label: "Function Compute definition", href: "https://github.com/yuzhang-zhong/runbookpilot/blob/main/infra/s.yaml" },
+    { icon: GitBranch, label: "Architecture and safety model", href: "https://github.com/yuzhang-zhong/runbookpilot/blob/main/docs/architecture.md" }
+  ];
+  return (
+    <section className="proof-section" id="results" aria-labelledby="results-title">
+      <div className="proof-heading">
+        <div className="panel-heading"><span>04</span><h2 id="results-title">Measured evaluation</h2></div>
+        <p>Every score below comes from a committed artifact. The browser demo is deterministic; the evaluation used real Qwen Cloud calls with no fallback.</p>
+      </div>
+      <div className="score-grid">
+        {scores.map((score) => (
+          <article className="score-card" key={score.label}>
+            <strong>{score.value}</strong>
+            <span>{score.label}</span>
+            <small>{score.note}</small>
+          </article>
+        ))}
+      </div>
+      <div className="proof-links" aria-label="Public evidence">
+        {proof.map(({ icon: Icon, label, href }) => (
+          <a href={href} target="_blank" rel="noreferrer" key={label}>
+            <Icon size={17} aria-hidden="true" />
+            <span>{label}</span>
+            <ArrowRight size={15} aria-hidden="true" />
+          </a>
+        ))}
+      </div>
+      <p className="deployment-note"><CloudCog size={16} aria-hidden="true" /> The Function Compute definition is deployment-ready. No billable cloud function was created after the trial checkout displayed a charge.</p>
+    </section>
+  );
+}
+
 export function App() {
   const [health, setHealth] = useState<HealthResponse>();
   const [scenarios, setScenarios] = useState<IncidentScenario[]>([]);
@@ -353,6 +396,8 @@ export function App() {
             )}
           </section>
         </div>
+
+        <EvaluationProof />
       </main>
 
       <footer>

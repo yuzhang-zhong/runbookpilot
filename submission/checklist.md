@@ -16,6 +16,7 @@
 - [x] Evaluation result matches the latest command output
 - [ ] Build article is public and linked
 - [ ] YouTube video is public, under three minutes, and includes the AI narration disclosure
+- [x] Local 2:47 demo MP4 passes full video/audio decode and key-frame review
 
 ## Alibaba Cloud proof
 

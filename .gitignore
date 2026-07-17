@@ -8,6 +8,7 @@ test-results/
 .env.*
 !.env.example
 demo/output/
+artifacts/
 *.log
 *.tsbuildinfo
 .DS_Store
