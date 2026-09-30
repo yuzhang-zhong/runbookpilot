@@ -47,6 +47,18 @@ pnpm eval:qwen
 pnpm test:e2e
 ```
 
+## Quick Walkthrough
+
+End-to-end operator flow for one incident (e.g. the `bad-release` scenario):
+
+1. **Pick a scenario.** Open the console and choose one of the eight sandbox incidents. No real production cluster is ever touched; everything is labeled deterministic sandbox data.
+2. **Diagnose.** The API gathers bounded evidence through the in-process MCP server (four read tools covering metrics, logs, deployments, and dependencies), then asks Qwen for a structured diagnosis and repair plan, followed by the `qwen3.6-flash` risk review.
+3. **Policy gate.** Deterministic policy checks the plan against the exact target allowlist, attaches an idempotency key, and issues a five-minute HMAC approval token. Nothing is mutated yet.
+4. **Human approval.** Review the plan in the console and click approve. Only a valid signed approval lets the mutation tools run.
+5. **Mutate and verify.** The sandbox mutation runs, and the verification tool checks recovery. Each step appears in the run timeline.
+
+Without `DASHSCOPE_API_KEY`, the same flow runs in clearly labeled deterministic simulation mode, so you can walk through the full operator experience without a model bill.
+
 ## API
 
 | Method | Path | Purpose |
@@ -78,6 +90,14 @@ pnpm demo:mux -- --screen artifacts/screen-recording.webm
 ```
 
 The reproducible Playwright recording follows the 2:47 narration timeline at 1080p, then ffmpeg burns the included captions and combines the OpenAI TTS track into an H.264/AAC MP4. The finished video discloses that its narration is AI generated. It contains no music or third-party footage.
+
+## Contributing
+
+This started as a Qwen Cloud Hackathon entry and stays a small, focused project. Bug fixes, doc improvements, and new deterministic sandbox scenarios are welcome.
+
+- Open an issue first for anything bigger than a typo.
+- Run `pnpm typecheck` and `pnpm test` before opening a pull request.
+- Keep the safety invariants intact: authorization stays outside model control, mutations only happen on a signed human approval, and no real production clusters are ever touched.
 
 ## License
 
