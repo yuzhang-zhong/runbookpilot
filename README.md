@@ -76,6 +76,8 @@ Individual commands remain available: `pnpm typecheck`, `pnpm test`, and `pnpm b
 
 ![RunbookPilot architecture: alert, orchestration, Qwen, MCP tools, policy, approval, sandbox, and verification](docs/architecture.svg)
 
+*Conceptual map of the API-backed path, which can run locally. The public Pages demo uses a browser-side adapter; Function Compute is an optional deployment target, not the current demo backend. [Follow the input, approval boundary, and output in the source →](docs/architecture.md)*
+
 | Layer | Implementation |
 | --- | --- |
 | Operator console | React 19 + Vite, eight repeatable incidents, visible run timeline |

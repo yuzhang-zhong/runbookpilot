@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1440" height="900" viewBox="0 0 1440 900" role="img" aria-labelledby="title desc">
   <title id="title">RunbookPilot architecture</title>
-  <desc id="desc">GitHub Pages sends incident requests to Function Compute. The orchestrator uses Qwen Cloud, MCP tools, policy, approval, and a deterministic SRE sandbox.</desc>
+  <desc id="desc">Conceptual API-backed path, run locally or on an optional cloud deployment: the operator console sends an incident to Hono, which uses diagnosis, MCP tools, policy, signed human approval, and a deterministic sandbox. The public Pages demo instead uses a browser-only simulation; Function Compute is not its current backend.</desc>
   <defs>
     <pattern id="grid" width="32" height="32" patternUnits="userSpaceOnUse"><path d="M32 0H0V32" fill="none" stroke="#223038" stroke-width="1"/></pattern>
     <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#55d6c2"/></marker>
@@ -9,11 +9,11 @@
     </style>
   </defs>
   <rect width="1440" height="900" fill="#0d1417"/><rect width="1440" height="900" fill="url(#grid)" opacity=".55"/>
-  <text x="70" y="72" class="label" style="font-size:31px">RUNBOOKPILOT / SYSTEM MAP</text><text x="70" y="103" class="small">Safety-gated SRE autopilot on Qwen Cloud</text>
-  <rect x="70" y="165" width="250" height="130" rx="4" class="box"/><circle cx="102" cy="195" r="13" class="badge"/><text x="98" y="200" class="n">1</text><text x="100" y="238" class="label">GITHUB PAGES</text><text x="100" y="267" class="small">React operator console</text>
-  <rect x="410" y="150" width="590" height="585" rx="5" class="box"/><text x="445" y="190" class="mono">ALIBABA CLOUD FUNCTION COMPUTE</text><text x="445" y="220" class="small">Node.js 20 custom runtime / Hono API</text>
+  <text x="70" y="72" class="label" style="font-size:31px">RUNBOOKPILOT / API PATH</text><text x="70" y="103" class="small">Conceptual implementation map. The public Pages demo runs a separate browser-only simulation.</text>
+  <rect x="70" y="165" width="250" height="130" rx="4" class="box"/><circle cx="102" cy="195" r="13" class="badge"/><text x="98" y="200" class="n">1</text><text x="100" y="238" class="label">OPERATOR CONSOLE</text><text x="100" y="267" class="small">Local / configured API endpoint</text>
+  <rect x="410" y="150" width="590" height="585" rx="5" class="box"/><text x="445" y="190" class="mono">HONO API / LOCAL OR OPTIONAL CLOUD</text><text x="445" y="220" class="small">Function Compute is a deployment target, not the current demo backend</text>
   <rect x="445" y="260" width="240" height="130" rx="4" class="safe"/><text x="470" y="300" class="label">ORCHESTRATOR</text><text x="470" y="330" class="small">Bounded tool loop</text><text x="470" y="354" class="small">Structured output only</text>
-  <rect x="740" y="260" width="225" height="130" rx="4" class="box"/><text x="765" y="300" class="label">QWEN CLOUD</text><text x="765" y="330" class="small">qwen3.7-plus</text><text x="765" y="354" class="small">qwen3.6-flash review</text>
+  <rect x="740" y="260" width="225" height="130" rx="4" class="box"/><text x="765" y="300" class="label">DIAGNOSIS</text><text x="765" y="330" class="small">Qwen when key configured</text><text x="765" y="354" class="small">Deterministic without a key</text>
   <rect x="445" y="445" width="240" height="120" rx="4" class="box"/><text x="470" y="485" class="label">MCP CLIENT / SERVER</text><text x="470" y="516" class="small">4 read + 2 change</text><text x="470" y="540" class="small">+ 1 verification tool</text>
   <rect x="740" y="445" width="225" height="120" rx="4" class="gate"/><text x="765" y="485" class="label">POLICY ENGINE</text><text x="765" y="516" class="small">Tool + target allowlist</text><text x="765" y="540" class="small">Evidence consistency</text>
   <rect x="740" y="610" width="225" height="90" rx="4" class="gate"/><text x="765" y="650" class="label">HUMAN APPROVAL</text><text x="765" y="679" class="small">Signed, 5 min, idempotent</text>
