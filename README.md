@@ -17,9 +17,7 @@ Gather bounded evidence, propose a repair, and stop for human approval.
 [![Actual RunbookPilot operator console in simulation mode, with the bad-release incident selected](docs/console-hero.jpg)](https://yuzhang-zhong.github.io/runbookpilot/)
 
 > [!IMPORTANT]
-> **Sandbox only. No production systems are connected.** Every alert, metric, log, deployment, dependency, mutation, and health probe uses deterministic fixtures. The public Pages demo runs in the browser: it does not call Qwen or demonstrate the API's server-side approval-token security.
-
-RunbookPilot separates investigation from authorization. In the API-backed path, the model can request read tools and propose a change; deterministic policy and a signed approval submission sit outside model control. An authorized sandbox mutation is followed by a separate verification step.
+> **Sandbox only.** The browser demo uses deterministic fixtures, with no Qwen calls or production connections. It does not enforce the API's server-side approval-token security; use the local API to inspect those controls.
 
 ## What you can explore
 
@@ -29,7 +27,7 @@ RunbookPilot separates investigation from authorization. In the API-backed path,
 - **Repeatable safety experiments.** Compare eight fixed incidents, including prompt injection in logs, across the browser demo, offline API, and Qwen-backed API.
 - **Inspectable evaluation.** Read row-level predictions, tool counts, latency, and model usage in the [checked-in evaluation artifacts](docs/evaluation/), with their limited scope made explicit.
 
-Use it to study an operator workflow, inspect policy and MCP boundaries, or experiment with sandbox scenarios—not as a production remediation service.
+Use it to study an operator workflow, inspect policy and MCP boundaries, or experiment with sandbox scenarios. It is not a production remediation service.
 
 ## Try the operator flow
 
@@ -81,6 +79,9 @@ Build the shared core before the first development run: its package entry points
 
 Set configuration in the environment before starting the API. [`.env.example`](.env.example) lists the available settings; use it as a reference, not as a ready-to-deploy secrets file.
 
+<details>
+<summary>Environment variables and defaults</summary>
+
 | Variable | Purpose / default |
 | --- | --- |
 | `DASHSCOPE_API_KEY` | Optional Qwen credential; absent means deterministic simulation |
@@ -91,12 +92,18 @@ Set configuration in the environment before starting the API. [`.env.example`](.
 | `ALLOWED_ORIGIN` | Exact browser origin; defaults to `http://localhost:5173` |
 | `PORT` | API listening port; defaults to `9000`. The development proxy targets that default |
 
+</details>
+
 > [!WARNING]
 > Model calls may incur charges. Keep credentials and signing secrets in your user environment or a secret manager, out of `.env`, source control, and browser-facing `VITE_*` variables. The API's dotenv loader uses `override: true`, so an existing local `.env` can override exported settings. Do not expose the development API publicly; CORS is not authentication.
 
 If Qwen is unavailable or returns invalid output, the API records a **`qwen_fallback`** event and uses the labeled deterministic diagnosis. A configured key or `mode: qwen` alone does not prove that a run used valid model output.
 
 ## Architecture and safety gates
+
+RunbookPilot separates investigation from authorization. In the API-backed path, the model can request read tools and propose a change; deterministic policy and a signed approval submission sit outside model control. An authorized sandbox mutation is followed by a separate verification step.
+
+Every alert, metric, log, deployment, dependency, mutation, and health probe uses deterministic fixtures.
 
 ![RunbookPilot architecture: alert, orchestration, Qwen, MCP tools, policy, approval, sandbox, and verification](docs/architecture.svg)
 
@@ -174,17 +181,25 @@ Individual commands remain available: `pnpm typecheck`, `pnpm test`, and `pnpm b
 
 See [test evidence and setup](docs/testing.md) for coverage, evaluation exclusions, and release checks. Documentation screenshots do not replace a fresh test run.
 
-### Measured results, with their scope attached
+<a id="measured-results-with-their-scope-attached"></a>
+### Recorded sandbox results
 
 These are **checked-in historical artifacts over eight fixed sandbox scenarios**, not production success rates or evidence of generalization. Both JSON timestamps are on **2026-07-17 UTC**.
 
-| Artifact | Root-cause matches | Action matches | Safety checks | Tool use |
-| --- | --- | --- | --- | --- |
-| [Offline deterministic path](docs/evaluation/results.json) | 100% | 100% | 100% hostile-target rejection | 5.3 calls/run average |
-| [Qwen-backed RunbookPilot](docs/evaluation/qwen-results.json) | 100% | 100% | 16/16 deterministic policy checks | 4 read calls/run average |
-| [No-tool Qwen baseline](docs/evaluation/qwen-results.json) | 75% | 75% | Not reported as a comparable baseline rate | 0 tool calls |
+| Artifact | Root-cause matches | Action matches | Tools/run |
+| --- | ---: | ---: | ---: |
+| [Offline path](docs/evaluation/results.json) | 100% | 100% | 5.3 average |
+| [Qwen-backed](docs/evaluation/qwen-results.json) | 100% | 100% | 4 reads average |
+| [No-tool Qwen baseline](docs/evaluation/qwen-results.json) | 75% | 75% | 0 |
+
+Safety checks are separate: the offline path recorded **100% hostile-target rejection**; Qwen-backed RunbookPilot passed **16/16 deterministic policy checks**. The baseline does not report a comparable safety-check rate.
+
+<details>
+<summary>Recorded timestamps, latency, and token use</summary>
 
 The offline artifact was generated by `pnpm eval` at `2026-07-17T00:42:50.393Z`; token counts are zero because it did not call Qwen. The Qwen comparison was generated by `pnpm eval:qwen` at `2026-07-17T00:53:34.176Z`: all eight agent runs and all eight baseline runs were valid, with no exclusions. The agent averaged **11,684 ms** per scenario and used **24,192 prompt tokens + 5,257 completion tokens** in total. The JSON includes row-level predictions, latency, token counts, validity flags, and safety-check counts.
+
+</details>
 
 The recorded perfect matches are properties of this small fixed test set. They are not a claim that autonomous incident response is safe in production.
 
