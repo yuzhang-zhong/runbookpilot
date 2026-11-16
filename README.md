@@ -2,6 +2,8 @@
 
 # RunbookPilot
 
+**English** · [简体中文](README.zh-CN.md)
+
 **Diagnose fast. Change carefully.**
 
 Safety-gated SRE incident investigation with Qwen and MCP.<br>
