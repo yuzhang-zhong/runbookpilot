@@ -122,13 +122,11 @@ Only **`rollback_release`** and **`restart_canary`** are mutation tools. A plan 
 
 ### Repository map
 
-| Path | Responsibility |
-| --- | --- |
-| [`apps/web/`](apps/web/) | React 19 + Vite operator console, visible timeline, and browser demo adapter |
-| [`apps/api/`](apps/api/) | Hono API, Qwen orchestration, signed approval, and MCP runtime |
-| [`packages/core/`](packages/core/) | Zod contracts, deterministic policy, and incident fixtures |
-| [`scripts/`](scripts/) · [`tests/e2e/`](tests/e2e/) | Evaluations, demo production, and desktop/mobile operator-flow tests |
-| [`infra/s.yaml`](infra/s.yaml) | Optional Function Compute deployment definition |
+- [`apps/web/`](apps/web/): React 19 + Vite operator console, visible timeline, and browser demo adapter.
+- [`apps/api/`](apps/api/): Hono API, Qwen orchestration, signed approval, and MCP runtime.
+- [`packages/core/`](packages/core/): Zod contracts, deterministic policy, and incident fixtures.
+- [`scripts/`](scripts/) and [`tests/e2e/`](tests/e2e/): evaluations, demo production, and desktop/mobile operator-flow tests.
+- [`infra/s.yaml`](infra/s.yaml): optional Function Compute deployment definition.
 
 ## Sandbox scenarios
 
@@ -221,13 +219,11 @@ Read the [security model](docs/security.md) before experimenting. Report securit
 
 ## Documentation
 
-| Guide | What it covers |
-| --- | --- |
-| [Architecture](docs/architecture.md) | Browser versus API paths, trust boundaries, and source entry points |
-| [Security model](docs/security.md) | Policy, approval tokens, replay behavior, and deliberate limitations |
-| [Testing](docs/testing.md) | Automated checks, evaluation contract, and release gate |
-| [Deployment](docs/deployment.md) | Optional Function Compute setup, quotas, Pages configuration, and shutdown |
-| [Evaluation artifacts](docs/evaluation/) | Offline and Qwen comparison JSON with row-level evidence |
+- [Architecture](docs/architecture.md): browser versus API paths, trust boundaries, and source entry points.
+- [Security model](docs/security.md): policy, approval tokens, replay behavior, and deliberate limitations.
+- [Testing](docs/testing.md): automated checks, evaluation contract, and release gate.
+- [Deployment](docs/deployment.md): optional Function Compute setup, quotas, Pages configuration, and shutdown.
+- [Evaluation artifacts](docs/evaluation/): offline and Qwen comparison JSON with row-level evidence.
 
 ## Demo narration
 
