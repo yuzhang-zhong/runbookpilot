@@ -6,8 +6,8 @@
 
 **Diagnose fast. Change carefully.**
 
-Safety-gated AI SRE incident response, root-cause diagnosis, and human-approved runbook automation with Qwen and Model Context Protocol (MCP).<br>
-Gather bounded metrics/log evidence, defend against log prompt injection, propose a rollback or canary restart, and stop at an HMAC human-approval gate.
+Safety-gated AI SRE incident response console using Qwen and Model Context Protocol (MCP) read tools: investigates metrics and logs, defends against prompt injection in logs, requires HMAC human approval before rollback or canary restart, and verifies service recovery.<br>
+基于 Qwen 与 MCP 协议、带日志提示词注入防御和 HMAC 人工审批安全闸门的 AI 运维（SRE）故障诊断、回滚修复与金丝雀重启控制台。
 
 [![Checks](https://github.com/yuzhang-zhong/runbookpilot/actions/workflows/checks.yml/badge.svg?branch=main)](https://github.com/yuzhang-zhong/runbookpilot/actions/workflows/checks.yml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
