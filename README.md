@@ -266,6 +266,12 @@ This remains a small, focused project. Bug fixes, documentation improvements, an
 2. Keep changes focused and run `pnpm typecheck` and `pnpm test` before opening a pull request.
 3. Preserve the safety invariants: authorization stays outside model control, API mutations require signed approval, and no real production clusters are touched. Keep the browser simulation clearly labeled.
 
+## Frequently asked
+
+- **What stops a prompt injection hidden inside application error logs from tricking the AI into running a destructive command?** Untrusted logs only enter bounded read-only MCP tools; the model cannot execute shell commands, only propose allowlisted actions (`rollback_release` or `restart_canary`) that must pass deterministic server-side policy checks *and* an operator's parameter-bound HMAC approval click.
+- **Can I test the console without a Qwen / DashScope API key or cloud account?** Yes. Both the [hosted GitHub Pages console](https://yuzhang-zhong.github.io/runbookpilot/) and the local Hono + MCP server (`pnpm dev` with `DASHSCOPE_API_KEY` unset) run all 8 incident scenarios offline.
+- **Does it auto-remediate every alert?** No. Dependency outages, expired certificates, and healthy noisy alerts escalate or close without mutating the service.
+
 ## 中文简介
 
 RunbookPilot 是一套**带安全闸门与人工审批边界的 AI SRE 运维故障诊断与自动修复原型**（基于 Qwen 大模型与 MCP 协议，提供[免安装在线演示](https://yuzhang-zhong.github.io/runbookpilot/)）。系统将「证据收集与根因诊断」同「变更授权」严格隔离：通过只读 MCP 工具查询指标、不可信日志（内置日志提示词注入防御）、发布历史与依赖健康度，对允许执行的回滚发布（`rollback_release`）或金丝雀重启（`restart_canary`）签发绑定参数的 HMAC-SHA-256 一次性人工审批令牌，并在执行后通过独立健康探针复核恢复结果。详见[简体中文说明](README.zh-CN.md)。
