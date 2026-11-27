@@ -38,5 +38,21 @@
       "nanoid@<3.3.18": "3.3.18",
       "source-map-js@<1.2.2": "1.2.2"
     }
-  }
+  },
+  "description": "Open-source AI on-call incident assistant and troubleshooting console that reads service alerts, metrics, and logs (blocking log prompt injection), proposes rollback or canary restart, and pauses at a human approval button.",
+  "repository": "github:yuzhang-zhong/runbookpilot",
+  "homepage": "https://yuzhang-zhong.github.io/runbookpilot/",
+  "keywords": [
+    "ai-sre",
+    "incident-response",
+    "on-call",
+    "troubleshooting",
+    "runbook-automation",
+    "human-approval",
+    "rollback",
+    "canary-restart",
+    "prompt-injection-defense",
+    "mcp",
+    "qwen"
+  ]
 }
