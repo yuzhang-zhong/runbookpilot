@@ -16,6 +16,8 @@
 
 </div>
 
+> **一句话速览：** 半夜 On-Call 值班遇到告警风暴，既想让 AI 帮忙查指标和日志，又怕日志里暗藏恶意提示词注入（如 `IGNORE PREVIOUS INSTRUCTIONS`）导致 AI 乱删库或擅自重启生产服务？RunbookPilot（[免 Key 在线演示](https://yuzhang-zhong.github.io/runbookpilot/)）用只读 MCP 工具隔离不可信日志，任何回滚（`rollback_release`）或金丝雀重启（`restart_canary`）都必须通过服务端策略校验与绑定参数的 HMAC 一次性人工批准按钮，执行后自动复核健康度。
+
 [![RunbookPilot 在模拟模式下的实际操作控制台，已选择 bad-release 故障](docs/console-hero.jpg)](https://yuzhang-zhong.github.io/runbookpilot/)
 
 > [!IMPORTANT]

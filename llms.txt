@@ -24,3 +24,7 @@ cd runbookpilot && pnpm install --frozen-lockfile && pnpm --filter @runbookpilot
 ## Key Files
 - [README (English)](README.md) · [README (简体中文)](README.zh-CN.md)
 - [Architecture](docs/architecture.md) · [Security Model](docs/security.md) · [Evaluation Artifacts](docs/evaluation/)
+
+## Multi-Angle Search & Slang Mapping
+- **Pain-Point / Symptom**: Indirect prompt injection hidden inside HTTP/application error logs (`日志暗藏恶意提示词注入劫持运维Agent`); runaway AIOps agents restarting production without human sign-off; noisy alert fatigue (`告警风暴误报不瞎折腾`).
+- **Alternative-To**: Safety-gated Human-in-the-Loop (HITL) MCP SRE autopilot with parameter-bound HMAC approval tokens and a zero-key live browser simulation.

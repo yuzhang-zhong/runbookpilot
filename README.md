@@ -274,7 +274,7 @@ This remains a small, focused project. Bug fixes, documentation improvements, an
 
 ## 中文简介
 
-RunbookPilot 是一套**带安全闸门与人工审批边界的 AI SRE 运维故障诊断与自动修复原型**（基于 Qwen 大模型与 MCP 协议，提供[免安装在线演示](https://yuzhang-zhong.github.io/runbookpilot/)）。系统将「证据收集与根因诊断」同「变更授权」严格隔离：通过只读 MCP 工具查询指标、不可信日志（内置日志提示词注入防御）、发布历史与依赖健康度，对允许执行的回滚发布（`rollback_release`）或金丝雀重启（`restart_canary`）签发绑定参数的 HMAC-SHA-256 一次性人工审批令牌，并在执行后通过独立健康探针复核恢复结果。详见[简体中文说明](README.zh-CN.md)。
+RunbookPilot 是一套**带安全闸门与人工审批边界的 AI SRE 运维故障诊断与自动修复原型**（基于 Qwen 大模型与 MCP 协议，提供[免安装在线演示](https://yuzhang-zhong.github.io/runbookpilot/)）。系统将「证据收集与根因诊断」同「变更授权」严格隔离：通过只读 MCP 工具查询指标、不可信日志（内置日志提示词注入防御）、发布历史与依赖健康度，对允许执行的回滚发布（`rollback_release`）或金丝雀重启（`restart_canary`）签发绑定参数的 HMAC-SHA-256 一次性人工审批令牌，并在执行后通过独立健康探针复核恢复结果。专为半夜 On-Call 值班排障与告警风暴设计，拦截日志中暗藏的 `IGNORE PREVIOUS INSTRUCTIONS` 等间接提示词注入，杜绝 AIOps Agent 未经人工签字擅自回滚重启生产服务。详见[简体中文说明](README.zh-CN.md)与 [`llms.txt`](llms.txt)。
 
 ## License
 
