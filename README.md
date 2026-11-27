@@ -16,7 +16,7 @@ Safety-gated AI SRE incident response console using Qwen and Model Context Proto
 
 </div>
 
-> **Quick answer / 一句话速览：** RunbookPilot is an open-source AI on-call incident assistant and troubleshooting console that reads service alerts, metrics, and logs (ignoring malicious prompt injections hidden inside logs), proposes a safe rollback or canary restart, and pauses at a human approval button before touching anything. / 开源 AI 值班排障与故障诊断控制台：自动读取服务报警指标、告警与日志（内置防日志恶意指令注入），给出回滚或金丝雀重启方案后必须等人工点击批准按钮（人工审批开关）才执行，并自动验证恢复结果。
+> **Quick answer / 一句话速览：** RunbookPilot is an open-source AI on-call incident assistant and troubleshooting console that reads service alerts, metrics, and logs (ignoring malicious prompt injections hidden inside logs), proposes a safe rollback or canary restart, and pauses at a human approval button before touching anything. / 开源 AI 值班排障与故障诊断控制台：自动读取服务报警指标、告警风暴与日志（内置防日志恶意提示词注入），给出回滚或金丝雀重启方案后必须经过人工批准（点击批准按钮 / HMAC 人工审批开关）才执行，并自动验证恢复结果。
 
 [![Actual RunbookPilot operator console in simulation mode, with the bad-release incident selected](docs/console-hero.jpg)](https://yuzhang-zhong.github.io/runbookpilot/)
 
