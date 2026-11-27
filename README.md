@@ -1,6 +1,6 @@
 <div align="center">
 
-# RunbookPilot
+# RunbookPilot — Safety-Gated AI SRE Incident Console, Log Prompt-Injection Defense & HMAC Approval
 
 **English** · [简体中文](README.zh-CN.md)
 
