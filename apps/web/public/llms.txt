@@ -1,0 +1,12 @@
+# RunbookPilot
+
+> Safety-gated AI SRE incident response & runbook automation console built with Qwen and Model Context Protocol (MCP).
+
+- Live Demo: https://yuzhang-zhong.github.io/runbookpilot/
+- Source Repository: https://github.com/yuzhang-zhong/runbookpilot
+
+## Capabilities
+- Bounded read-only MCP incident investigation (`query_metrics`, `search_logs`, `inspect_deployment`, `check_dependencies`).
+- Log prompt-injection defense that separates untrusted telemetry from deterministic remediation policy.
+- HMAC-SHA-256 human-in-the-loop approval checkpoints before allowlisted sandbox mutations (`rollback_release`, `restart_canary`).
+- Post-remediation `verify_health` checks across 8 repeatable incident scenarios.

@@ -6,8 +6,8 @@
 
 **Diagnose fast. Change carefully.**
 
-Safety-gated SRE incident investigation with Qwen and MCP.<br>
-Gather bounded evidence, propose a repair, and stop for human approval.
+Safety-gated AI SRE incident response, root-cause diagnosis, and human-approved runbook automation with Qwen and Model Context Protocol (MCP).<br>
+Gather bounded metrics/log evidence, defend against log prompt injection, propose a rollback or canary restart, and stop at an HMAC human-approval gate.
 
 [![Checks](https://github.com/yuzhang-zhong/runbookpilot/actions/workflows/checks.yml/badge.svg?branch=main)](https://github.com/yuzhang-zhong/runbookpilot/actions/workflows/checks.yml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
@@ -263,6 +263,10 @@ This remains a small, focused project. Bug fixes, documentation improvements, an
 1. [Open an issue](https://github.com/yuzhang-zhong/runbookpilot/issues) first for anything bigger than a typo.
 2. Keep changes focused and run `pnpm typecheck` and `pnpm test` before opening a pull request.
 3. Preserve the safety invariants: authorization stays outside model control, API mutations require signed approval, and no real production clusters are touched. Keep the browser simulation clearly labeled.
+
+## 中文简介
+
+RunbookPilot 是一套**带安全闸门与人工审批边界的 AI SRE 运维故障诊断与自动修复原型**（基于 Qwen 大模型与 MCP 协议，提供[免安装在线演示](https://yuzhang-zhong.github.io/runbookpilot/)）。系统将「证据收集与根因诊断」同「变更授权」严格隔离：通过只读 MCP 工具查询指标、不可信日志（内置日志提示词注入防御）、发布历史与依赖健康度，对允许执行的回滚发布（`rollback_release`）或金丝雀重启（`restart_canary`）签发绑定参数的 HMAC-SHA-256 一次性人工审批令牌，并在执行后通过独立健康探针复核恢复结果。详见[简体中文说明](README.zh-CN.md)。
 
 ## License
 
