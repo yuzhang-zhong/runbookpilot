@@ -284,6 +284,15 @@ pnpm demo:mux --screen artifacts/screen-recording.webm
 3. 保留安全不变量：授权始终在模型控制之外，API 变更必须经过签名审批，且不得触碰真实生产集群。浏览器模拟必须有清晰标识。
 
 <a id="license"></a>
+## 常见问题 · FAQ
+
+<details>
+<summary>RunbookPilot 与传统运维自动化（Rundeck / HolmesGPT）或全自动黑盒 AI SRE 有何不同？</summary>
+
+传统只读排障工具（如 **HolmesGPT**）缺乏闭环恢复验证，而无护栏全自动 Agent 极易被业务日志里夹带的**恶意提示词注入（Indirect Prompt Injection）**诱导误重启生产环境。作为 MIT **开源**项目，RunbookPilot 将只读 **MCP** 指标/日志取证与控制面严格隔离，强制要求绑定参数且 5 分钟过期的 **HMAC-SHA-256 人工审批令牌**后才允许执行白名单回滚或金丝雀重启，并提供免 Key 浏览器沙盒（https://yuzhang-zhong.github.io/runbookpilot/ ）。
+
+</details>
+
 ## 许可证
 
 [MIT](LICENSE)。
